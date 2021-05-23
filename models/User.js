@@ -34,13 +34,14 @@ User.init(
       },
       // TODO: Add password hash hooks via bcrypt
     },
-    post_id: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: 'user',
-        key: 'id',
-      }
-    }
+    // post_id: {
+    //   type: DataTypes.INTEGER,
+    //   allow_null: true,
+    //   references: {
+    //     model: 'blog_post',
+    //     key: 'id',
+    //   }
+    // }
   },
   {
     sequelize,
