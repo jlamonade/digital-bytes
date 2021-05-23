@@ -1,5 +1,6 @@
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
+const bcrypt = require("bcrypt")
 
 class User extends Model {}
 
@@ -32,30 +33,24 @@ User.init(
       validate: {
         len: [8],
       },
-      // TODO: Add password hash hooks via bcrypt
-    },
-    // post_id: {
-    //   type: DataTypes.INTEGER,
-    //   allow_null: true,
-    //   references: {
-    //     model: 'blog_post',
-    //     key: 'id',
-    //   }
-    // }
+    }
   },
   {
     hooks: {
       beforeCreate: async (newUserData) => {
-        newUserData.password = bcrypt.hash(newUserData.password, 10);
+        newUserData.password = await bcrypt.hash(newUserData.password, 10);
         return newUserData;
       },
       beforeUpdate: async (newUserData) => {
-        newUserData.password = bcrypt.hash(newUserData.password, 10);
+        newUserData.password = await bcrypt.hash(newUserData.password, 10);
         return newUserData;
       },
+      // TODO: figure out how to hash passwords for data seeding
+      // beforeBulkCreate: async (newUserData) => {
+      //   newUserData.password = await bcrypt.hash(newUserData.password, 10);
+      //   return newUserData;
+      // }
     },
-  },
-  {
     sequelize,
     timestamps: true,
     freezeTableName: true,
