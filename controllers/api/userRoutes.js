@@ -5,7 +5,7 @@ const { User, BlogPost } = require("../../models");
 router.post("/", async (req, res) => {
   try {
     const userData = await User.create(req.body);
-    if (userData) res.status(200).json("User successfully created.");
+    if (userData) res.status(200).json(`User successfully created. ID: ${userData.id}`);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -39,7 +39,18 @@ router.get("/:id", async (req, res) => {
 });
 
 // UPDATE
-// router.put();
+router.put("/:id", async (req, res) => {
+  try {
+    const userData = await User.update(req.body, {
+      where: {
+        id: req.params.id
+      }
+    })
+    if (userData[0]) res.status(200).json("User Successfully Updated.")
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 // DELETE
 
