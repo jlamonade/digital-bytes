@@ -3,7 +3,7 @@ const router = require("express").Router();
 
 // router.use('/api', apiRoutes);
 
-router.use((req, res) => {
+router.use('/', (req, res) => {
   res.render("index");
 });
 
