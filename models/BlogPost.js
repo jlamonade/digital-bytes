@@ -2,6 +2,7 @@ const { Model, DataTypes } = require("sequelize");
 
 class BlogPost extends Model {}
 
+// TODO: verify that dates work
 BlogPost.init(
   {
     id: {
