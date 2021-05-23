@@ -19,7 +19,7 @@ const blogPostData = [
 ];
 
 const seedBlogPosts = () => {
-  BlogPost.bullkCreate(blogPostData);
+  BlogPost.bulkCreate(blogPostData);
 };
 
 module.exports = seedBlogPosts;
