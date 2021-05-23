@@ -7,13 +7,18 @@ const app = express();
 const hbs = exphbs.create({})
 const PORT = process.env.PORT || 3001;
 
+// HANDLEBARS
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
+
+// MIDDLEWARE
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// CONTROLLERS
 app.use(routes);
 
+// INIT
 app.listen(PORT, () => {
     console.log(`App listening on port ${PORT}.`)
 })
