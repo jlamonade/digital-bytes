@@ -4,7 +4,7 @@ const router = require("express").Router();
 // router.use('/api', apiRoutes);
 
 router.use((req, res) => {
-  res.render("main", { layout: false });
+  res.render("index");
 });
 
 module.exports = router;
