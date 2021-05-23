@@ -33,6 +33,13 @@ User.init(
       },
       // TODO: Add password hash hooks via bcrypt
     },
+    post_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'user',
+        key: 'id',
+      }
+    }
   },
   {
     sequelize,
