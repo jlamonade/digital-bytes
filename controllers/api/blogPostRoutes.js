@@ -33,11 +33,11 @@ router.get('/', async (req, res) => {
 })
 
 // get posts associated to specific user
-router.get('/:user_id', async (req, res) => {
+router.get('/user/:user_id', async (req, res) => {
   try {
     const blogData = await BlogPost.findAll({
       where: {
-        user_id: req.body.user_id
+        user_id: req.params.user_id
       },
       include: { model: User, attributes: ['name'] }
     })
