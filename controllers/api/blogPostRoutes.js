@@ -26,6 +26,8 @@ router.get('/', async (req, res) => {
     const blogData = await BlogPost.findAll({
       include: { model: User, attributes: ['name'] }
     })
+    const posts = blogData.map(element => element.get({ plain: true }))
+    console.log(posts)
     if (blogData) res.status(200).json(blogData)
     else res.status(404).json('404 Blog Data Not Found.')
   } catch (err) {

@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const { User, BlogPost } = require('../../models')
 
+// TODO: put routes behind authentication
 // CREATE
 router.post('/', async (req, res) => {
   try {
