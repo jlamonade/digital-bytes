@@ -5,7 +5,7 @@ const { User, BlogPost } = require('../../models')
 // TODO: figure out logic to create posts owned by authenticated User
 // TODO: parse data into handlebars friendly format
 // TODO: Remove error messages in status 500, security risk
-router.post('/new', async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const postData = await BlogPost.create(req.body, {
       where: {
@@ -48,6 +48,21 @@ router.get('/user/:user_id', async (req, res) => {
     res.status(500).json(err)
   }
 })
+// TODO: get posts by id for user to edit
+router.get('/:id', async (req, res) => {
+  try {
+    const blogData = await BlogPost.findAll({
+      where: {
+        user_id: req.body.user_id,
+        id: req.params.id
+      }
+    })
+    if (blogData) res.status(200).json(blogData)
+    else res.status(404).json('404 Post Not Found.')
+  } catch (err) {
+    res.status(500).json('500 Internal Server Error.')
+  }
+})
 
 // UPDATE
 router.put('/:id', async (req, res) => {
@@ -65,5 +80,19 @@ router.put('/:id', async (req, res) => {
 })
 
 // DELETE
+router.delete('/:id', async (req, res) => {
+  try {
+    const blogData = await BlogPost.destroy({
+      where: {
+        id: req.params.id,
+        user_id: req.body.user_id
+      }
+    })
+    if (blogData[0]) res.status(200).json('Post Successfully Delete')
+    else res.status(404).json('404 Post Not Found.')
+  } catch (err) {
+    res.status(500).json('500 Internal Server Error')
+  }
+})
 
 module.exports = router
