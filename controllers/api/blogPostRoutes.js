@@ -4,6 +4,7 @@ const { User, BlogPost } = require('../../models')
 // CREATE
 // TODO: figure out logic to create posts owned by authenticated User
 // TODO: parse data into handlebars friendly format
+// TODO: Remove error messages in status 500, security risk
 router.post('/new', async (req, res) => {
   try {
     const postData = await BlogPost.create(req.body, {
@@ -49,6 +50,19 @@ router.get('/user/:user_id', async (req, res) => {
 })
 
 // UPDATE
+router.put('/:id', async (req, res) => {
+  try {
+    const blogData = await BlogPost.update(req.body, {
+      where: {
+        id: req.params.id
+      }
+    })
+    if (blogData[0]) res.status(200).json('Post Successfully Updated')
+    else res.status(404).json('404 Post Not Found')
+  } catch (err) {
+    res.status(500).json(err)
+  }
+})
 
 // DELETE
 
