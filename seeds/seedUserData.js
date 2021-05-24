@@ -1,18 +1,18 @@
-const { User } = require("../models");
+const { User } = require('../models')
 
 const userData = [
   {
-    name: "Jason",
-    email: "nyjasonlam@gmail.com",
-    password: "asdfjason",
+    name: 'Jason',
+    email: 'nyjasonlam@gmail.com',
+    password: 'asdfjason'
   },
   {
-    name: "Joseph",
-    email: "joseph@gmail.com",
-    password: "asdfjoseph",
-  },
-];
+    name: 'Joseph',
+    email: 'joseph@gmail.com',
+    password: 'asdfjoseph'
+  }
+]
 
-const seedUserData = () => User.bulkCreate(userData);
+const seedUserData = () => User.bulkCreate(userData)
 
-module.exports = seedUserData;
+module.exports = seedUserData
