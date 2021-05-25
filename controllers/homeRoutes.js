@@ -7,7 +7,7 @@ router.get('/', async (req, res) => {
       include: { model: User, attributes: ['name'] }
     })
     const posts = blogData.map(element => element.get({ plain: true }))
-    if (blogData) res.render('index', { posts: posts })
+    if (blogData) res.render('index', { posts: posts, loggedIn: req.session.loggedIn })
     else res.status(404).json('404 Blog Data Not Found.')
   } catch (err) {
     res.status(500).json(err)
@@ -15,14 +15,17 @@ router.get('/', async (req, res) => {
 })
 
 router.get('/login', async (req, res) => {
-  return await res.render('login')
+  if (req.session.loggedIn) {
+    console.log(req.session.loggedIn)
+    res.redirect('/')
+  } else { return await res.render('login') }
 })
 
 router.get('/signup', async (req, res) => {
   return await res.render('signup')
 })
 
-router.get('/dashboard/:id', async (req, res) => {
+router.get('/dashboard/', async (req, res) => {
   try {
     const blogData = await BlogPost.findAll({
       where: {
