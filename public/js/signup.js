@@ -4,22 +4,23 @@ const signUpHandler = async (e) => {
   const email = document.querySelector('#input-email').value.trim()
   const password = document.querySelector('#input-password').value.trim()
 
-  const response = await fetch('/api/users/signup', {
-    method: 'POST',
-    body: JSON.stringify({
-      name,
-      email,
-      password
-    }),
-    headers: {
-      'Content-type': 'application/json'
+  if (name && email && password) {
+    const response = await fetch('/api/users/signup', {
+      method: 'POST',
+      body: JSON.stringify({
+        name,
+        email,
+        password
+      }),
+      headers: {
+        'Content-type': 'application/json'
+      }
+    })
+    if (response.ok) {
+      document.location.replace('/login')
+    } else {
+      alert('Please correct information.')
     }
-  })
-
-  if (response.ok) {
-    document.location.replace('/login')
-  } else {
-    alert('Please correct information.')
   }
 }
 
