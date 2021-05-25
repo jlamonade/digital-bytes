@@ -13,7 +13,7 @@ router.post('/', async (req, res) => {
     if (postData) res.status(200).json('Post successfully posted.')
     else res.status(404).json('404 User Not Found.')
   } catch (err) {
-    res.status(500).json('500 Internal Server Error.')
+    res.status(500).json(err)
   }
 })
 
