@@ -2,7 +2,7 @@ const handleCreatePost = async (e) => {
   e.preventDefault()
   const title = document.querySelector('#input-title').value.trim()
   const body = document.querySelector('#input-body').value.trim()
-  const user_id = 1 // req.session.user_id
+  const userId = 1 // req.session.user_id
 
   if (title && body) {
     const response = await fetch('/api/posts', {
@@ -10,7 +10,7 @@ const handleCreatePost = async (e) => {
       body: JSON.stringify({
         title,
         body,
-        user_id
+        user_id: userId
       }),
       headers: {
         'Content-type': 'application/json'
