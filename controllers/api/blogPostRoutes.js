@@ -5,10 +5,10 @@ const { User, BlogPost } = require('../../models')
 // TODO: figure out logic to create posts owned by authenticated User
 router.post('/', async (req, res) => {
   try {
-    const postData = await BlogPost.create(req.body, {
-      where: {
-        user_id: req.body.user_id
-      }
+    const postData = await BlogPost.create({
+      title: req.body.title,
+      body: req.body.body,
+      user_id: await req.session.user_id
     })
     if (postData) res.status(200).json('Post successfully posted.')
     else res.status(404).json('404 User Not Found.')
@@ -46,6 +46,7 @@ router.get('/user/:user_id', async (req, res) => {
     res.status(500).json('500 Internal Server Error.')
   }
 })
+
 // TODO: get posts by id for user to edit
 router.get('/:id', async (req, res) => {
   try {

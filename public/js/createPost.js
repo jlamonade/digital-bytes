@@ -9,15 +9,14 @@ const handleCreatePost = async (e) => {
       method: 'POST',
       body: JSON.stringify({
         title,
-        body,
-        user_id: userId
+        body
       }),
       headers: {
         'Content-type': 'application/json'
       }
     })
     if (response.ok) { // TODO: need to change route to read logged in user, use req.session.user_id
-      document.location.replace('/dashboard/1')
+      document.location.replace('/dashboard')
     } else {
       alert('Post not created')
     }

@@ -16,7 +16,6 @@ router.get('/', async (req, res) => {
 
 router.get('/login', async (req, res) => {
   if (req.session.loggedIn) {
-    console.log(req.session.loggedIn)
     res.redirect('/')
   } else { return await res.render('login') }
 })
@@ -29,7 +28,7 @@ router.get('/dashboard/', async (req, res) => {
   try {
     const blogData = await BlogPost.findAll({
       where: {
-        user_id: req.session.user_id
+        user_id: await req.session.user_id
       }
     })
     const posts = blogData.map(element => element.get({ plain: true }))

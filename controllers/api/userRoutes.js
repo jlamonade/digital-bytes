@@ -32,6 +32,7 @@ router.post('/login', async (req, res) => {
       res.status(400).json({ message: 'Incorrect email or password.' })
       return
     }
+
     req.session.save(() => {
       req.session.loggedIn = true
       req.session.user_id = userData.id
