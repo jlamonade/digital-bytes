@@ -3,7 +3,7 @@ const { User, BlogPost } = require('../../models')
 
 // TODO: put routes behind authentication
 // CREATE, USER SIGN UP
-router.post('/', async (req, res) => {
+router.post('/signup', async (req, res) => {
   try {
     const userData = await User.create(req.body)
     req.session.save(() => {
@@ -16,7 +16,7 @@ router.post('/', async (req, res) => {
 })
 
 // LOGIN
-router.post('/', async (req, res) => {
+router.post('/login', async (req, res) => {
   try {
     const userData = await User.findOne({
       where: {
@@ -39,6 +39,17 @@ router.post('/', async (req, res) => {
     })
   } catch (err) {
     res.status(500).json('500 Internal Server Error.')
+  }
+})
+
+// LOGOUT
+router.post('/logout', async (req, res) => {
+  if (req.session.loggedIn) {
+    req.session.destroy(() => {
+      res.status(204).end()
+    })
+  } else {
+    res.status(404).end()
   }
 })
 

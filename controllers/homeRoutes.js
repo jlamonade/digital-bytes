@@ -26,7 +26,7 @@ router.get('/dashboard/:id', async (req, res) => {
   try {
     const blogData = await BlogPost.findAll({
       where: {
-        user_id: req.params.id // TODO: use authentication to find correct user
+        user_id: req.session.user_id
       }
     })
     const posts = blogData.map(element => element.get({ plain: true }))
