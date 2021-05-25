@@ -1,7 +1,14 @@
 <div class="col col-12 py-3">
-  <h2>Login</h2>
+  <h2>Sign Up</h2>
   <form>
     <div class="mb-3">
+      <label for="input-username" class="form-label">Username</label>
+      <input
+        type="email"
+        class="form-control"
+        id="input-username"
+        aria-describedby="usernameHelp"
+      />
       <label for="input-email" class="form-label">Email address</label>
       <input
         type="email"
@@ -15,10 +22,6 @@
     <div class="mb-3">
       <label for="input-password" class="form-label">Password</label>
       <input type="password" class="form-control" id="input-password" />
-    </div>
-    <div class="mb-3 form-check">
-      <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-      <label class="form-check-label" for="exampleCheck1">Remember Me</label>
     </div>
     <button type="submit" class="btn btn-primary">Login</button>
   </form>
