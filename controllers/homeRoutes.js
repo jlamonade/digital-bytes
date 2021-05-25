@@ -24,17 +24,19 @@ router.get('/signup', async (req, res) => {
   return await res.render('signup')
 })
 
-router.get('/dashboard/', async (req, res) => {
-  try {
-    const blogData = await BlogPost.findAll({
-      where: {
-        user_id: await req.session.user_id
-      }
-    })
-    const posts = blogData.map(element => element.get({ plain: true }))
-    await res.render('dashboard', { posts: posts })
-  } catch (err) {
-    res.status(500).json('500 Internal Server Error.')
+router.get('/dashboard', async (req, res) => {
+  if (req.session.loggedIn) {
+    try {
+      const blogData = await BlogPost.findAll({
+        where: {
+          user_id: await req.session.user_id
+        }
+      })
+      const posts = blogData.map(element => element.get({ plain: true }))
+      await res.render('dashboard', { posts: posts })
+    } catch (err) {
+      res.status(500).json('500 Internal Server Error.')
+    }
   }
 })
 
