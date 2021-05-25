@@ -8,7 +8,7 @@ router.post('/', async (req, res) => {
     const userData = await User.create(req.body)
     if (userData) res.status(200).json(`User successfully CREATED. ID: ${userData.id}`)
   } catch (err) {
-    res.status(500).json(err)
+    res.status(500).json('500 Internal Server Error.')
   }
 })
 
@@ -20,7 +20,7 @@ router.get('/', async (req, res) => {
     })
     res.status(200).json(userData)
   } catch (err) {
-    res.status(500).json(err)
+    res.status(500).json('500 Internal Server Error.')
   }
 })
 
@@ -35,7 +35,7 @@ router.get('/:id', async (req, res) => {
     if (userData[0]) res.status(200).json(userData)
     else res.status(404).json('404: User Not Found.')
   } catch (err) {
-    res.status(500).json(err)
+    res.status(500).json('500 Internal Server Error.')
   }
 })
 
@@ -50,7 +50,7 @@ router.put('/:id', async (req, res) => {
     if (userData[0]) res.status(200).json('User Successfully UPDATED.')
     else res.status(404).json('404: User Not Found.')
   } catch (err) {
-    res.status(500).json(err)
+    res.status(500).json('500 Internal Server Error.')
   }
 })
 
@@ -65,7 +65,7 @@ router.delete('/:id', async (req, res) => {
     if (userData) res.status(200).json('User successfully DELETED.')
     else res.status(404).json('404: User Not Found.')
   } catch (err) {
-    res.status(500).json(err)
+    res.status(500).json('500 Internal Server Error.')
   }
 })
 

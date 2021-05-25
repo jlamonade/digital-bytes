@@ -3,8 +3,6 @@ const { User, BlogPost } = require('../../models')
 
 // CREATE
 // TODO: figure out logic to create posts owned by authenticated User
-// TODO: parse data into handlebars friendly format
-// TODO: Remove error messages in status 500, security risk
 router.post('/', async (req, res) => {
   try {
     const postData = await BlogPost.create(req.body, {
@@ -15,7 +13,7 @@ router.post('/', async (req, res) => {
     if (postData) res.status(200).json('Post successfully posted.')
     else res.status(404).json('404 User Not Found.')
   } catch (err) {
-    res.status(500).json(err)
+    res.status(500).json('500 Internal Server Error.')
   }
 })
 
@@ -29,7 +27,7 @@ router.get('/', async (req, res) => {
     if (blogData) res.status(200).json(blogData)
     else res.status(404).json('404 Blog Data Not Found.')
   } catch (err) {
-    res.status(500).json(err)
+    res.status(500).json('500 Internal Server Error.')
   }
 })
 
@@ -45,7 +43,7 @@ router.get('/user/:user_id', async (req, res) => {
     if (blogData) res.status(200).json(blogData)
     else res.status(404).json('404 User Posts Not Found.')
   } catch (err) {
-    res.status(500).json(err)
+    res.status(500).json('500 Internal Server Error.')
   }
 })
 // TODO: get posts by id for user to edit
@@ -75,7 +73,7 @@ router.put('/:id', async (req, res) => {
     if (blogData[0]) res.status(200).json('Post Successfully Updated')
     else res.status(404).json('404 Post Not Found')
   } catch (err) {
-    res.status(500).json(err)
+    res.status(500).json('500 Internal Server Error.')
   }
 })
 
