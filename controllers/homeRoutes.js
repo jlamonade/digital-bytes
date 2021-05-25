@@ -17,9 +17,11 @@ router.get('/', async (req, res) => {
 router.get('/login', async (req, res) => {
   return await res.render('login')
 })
+
 router.get('/signup', async (req, res) => {
   return await res.render('signup')
 })
+
 router.get('/dashboard', async (req, res) => {
   return await res.render('dashboard')
 })
