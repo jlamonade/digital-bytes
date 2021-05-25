@@ -22,8 +22,18 @@ router.get('/signup', async (req, res) => {
   return await res.render('signup')
 })
 
-router.get('/dashboard', async (req, res) => {
-  return await res.render('dashboard')
+router.get('/dashboard/:id', async (req, res) => {
+  try {
+    const blogData = await BlogPost.findAll({
+      where: {
+        user_id: req.params.id // TODO: use authentication to find correct user
+      }
+    })
+    const posts = blogData.map(element => element.get({ plain: true }))
+    await res.render('dashboard', { posts: posts })
+  } catch (err) {
+    res.status(500).json('500 Internal Server Error.')
+  }
 })
 
 module.exports = router
