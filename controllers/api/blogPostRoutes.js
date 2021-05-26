@@ -46,7 +46,6 @@ router.get('/user/:user_id', async (req, res) => {
   }
 })
 
-// TODO: get posts by id for user to edit
 router.get('/:id', async (req, res) => {
   try {
     const blogData = await BlogPost.findByPk(req.params.id)
