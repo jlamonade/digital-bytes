@@ -73,4 +73,15 @@ router.get('/update/:id', async (req, res) => {
   }
 })
 
+router.get('/posts/:id', async (req, res) => {
+  try {
+    const blogData = await BlogPost.findByPk(req.params.id)
+    const post = blogData.get({ plain: true })
+    if (post) res.render('article', { post: post })
+    else res.status(404).json('404 Post Not Found.')
+  } catch (err) {
+    res.status(500).json('500 Internal Server Error.')
+  }
+})
+
 module.exports = router

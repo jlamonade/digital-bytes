@@ -11,3 +11,13 @@ router.post('/comment', async (req, res) => {
     res.status(500).json('500 Internal Server Error.')
   }
 })
+
+router.get('/comment', async (req, res) => {
+  try {
+    const commentData = await Comment.findAll({
+      where: {
+        post_id: 
+      }
+    })
+  } catch (err) {}
+})
