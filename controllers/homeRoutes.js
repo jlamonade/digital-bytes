@@ -40,4 +40,12 @@ router.get('/dashboard', async (req, res) => {
   }
 })
 
+router.get('/new', async (req, res) => {
+  if (!req.session.loggedIn) {
+    res.render('login')
+  } else {
+    res.render('newpost')
+  }
+})
+
 module.exports = router
