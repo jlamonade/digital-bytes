@@ -4,6 +4,8 @@ const handleCreatePost = async (e) => {
   const body = document.querySelector('#input-body').value.trim()
 
   if (title && body) {
+    // creates a fetch post request to create new posts using the
+    // values taken from the input fields
     const response = await fetch('/api/posts', {
       method: 'POST',
       body: JSON.stringify({
