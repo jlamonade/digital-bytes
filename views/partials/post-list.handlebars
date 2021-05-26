@@ -5,12 +5,8 @@
       <h6 class="card-subtitle">{{createdAt}}</h6>
     </div>
     <div class="card-footer">
-      <a href="/update/{{id}}">
-        <button type="button" class="btn btn-info">Edit</button>
-      </a>
-      <a href="/delete/{{id}}">
-        <button type="button" class="btn btn-warning">Delete</button>
-      </a>
+      <a class="btn btn-dark" href="/update/{{id}}">Edit</a>
+      <a class="btn btn-warning" data-id="{{id}}" id="delete-button">Delete</a>
     </div>
   </div>
 </div>

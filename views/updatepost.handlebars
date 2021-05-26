@@ -9,6 +9,7 @@
         <label for="input-body" class="form-label">Body</label>
         <textarea class="form-control" rows="10" id="input-body">{{post.body}}</textarea>
       </div>
+      {{!-- post id on the line below is passed in by the route--}}
       <button type="submit" class="btn btn-primary" id="submit-button" data-id="{{post.id}}">Submit</button>
     </form>
   </div>

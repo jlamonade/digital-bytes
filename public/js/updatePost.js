@@ -13,7 +13,7 @@ const updatePostHandler = async (e) => {
   if (response.ok) {
     document.location.replace('/dashboard')
   } else {
-    alert('Post not updated')
+    alert('Post not updated.')
   }
 }
 

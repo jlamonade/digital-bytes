@@ -7,7 +7,7 @@ router.post('/signup', async (req, res) => {
   try {
     const userData = await User.create(req.body)
     req.session.save(() => {
-      req.session.loggedIn = false
+      req.session.loggedIn = false // user needs to log in after signing up
       res.status(200).json(`User successfully CREATED. ID: ${userData.id}`)
     })
   } catch (err) {
@@ -18,24 +18,26 @@ router.post('/signup', async (req, res) => {
 // LOGIN
 router.post('/login', async (req, res) => {
   try {
+    // finds user by email
     const userData = await User.findOne({
       where: {
         email: req.body.email
       }
     })
-    if (!userData) {
+    if (!userData) { // if user not found
       res.status(400).json({ message: 'Incorrect email or password.' })
       return
     }
+    // if user is found check password
     const validPassword = await userData.checkPassword(req.body.password)
-    if (!validPassword) {
+    if (!validPassword) { // if password is incorrect
       res.status(400).json({ message: 'Incorrect email or password.' })
       return
     }
 
     req.session.save(() => {
-      req.session.loggedIn = true
-      req.session.user_id = userData.id
+      req.session.loggedIn = true // user is signed in
+      req.session.user_id = userData.id // user id saved to session to associate posts to user
       res.status(200).json({ user: userData, message: 'Login Successful' })
     })
   } catch (err) {
@@ -46,7 +48,7 @@ router.post('/login', async (req, res) => {
 // LOGOUT
 router.post('/logout', async (req, res) => {
   if (req.session.loggedIn) {
-    req.session.destroy(() => {
+    req.session.destroy(() => { // session is destroyed along with the user id info
       res.status(204).end()
     })
   } else {

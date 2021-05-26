@@ -47,6 +47,8 @@ router.get('/dashboard', async (req, res) => {
     } catch (err) {
       res.status(500).json('500 Internal Server Error.')
     }
+  } else {
+    res.render('login')
   }
 })
 
