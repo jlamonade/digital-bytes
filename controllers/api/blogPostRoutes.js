@@ -50,12 +50,7 @@ router.get('/user/:user_id', async (req, res) => {
 // TODO: get posts by id for user to edit
 router.get('/:id', async (req, res) => {
   try {
-    const blogData = await BlogPost.findAll({
-      where: {
-        user_id: req.body.user_id,
-        id: req.params.id
-      }
-    })
+    const blogData = await BlogPost.findByPk(req.params.id)
     if (blogData) res.status(200).json(blogData)
     else res.status(404).json('404 Post Not Found.')
   } catch (err) {
