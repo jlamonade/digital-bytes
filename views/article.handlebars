@@ -1,1 +1,8 @@
-{{> post-card post}}
+<div class="row g-3 py-3">
+    {{> post-card post}}
+</div>
+<div class="row g-3 py-3">
+    {{#each comments as |comment|}}
+    {{> comment-card comment}}
+    {{/each}}
+</div>
