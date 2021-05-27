@@ -1,7 +1,7 @@
 const commentHandler = async (e) => {
   e.preventDefault()
   const comment = document.querySelector('#input-comment').value.trim()
-  const post_id = document.querySelector('#comment-form').dataset.id
+  const postId = document.querySelector('#comment-form').dataset.id
   console.log(JSON.stringify({
     body: comment
   }))
@@ -9,7 +9,7 @@ const commentHandler = async (e) => {
     method: 'POST',
     body: JSON.stringify({
       body: comment,
-      post_id
+      postId
     }),
     headers: {
       'Content-type': 'application/json'
@@ -17,7 +17,7 @@ const commentHandler = async (e) => {
   })
 
   if (response.ok) {
-    document.location.replace('/')
+    document.location.reload()
   } else {
     alert('Comment not submitted')
   }
