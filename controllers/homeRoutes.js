@@ -4,7 +4,8 @@ const { BlogPost, User, Comment } = require('../models')
 router.get('/', async (req, res) => {
   try {
     const blogData = await BlogPost.findAll({
-      include: { model: User, attributes: ['name'] }
+      include: { model: User, attributes: ['name'] },
+      order: [['createdAt', 'DESC']]
     })
     // gets all posts and gets the plain version so that data can be iterated
     // and rendered onto page
@@ -39,7 +40,8 @@ router.get('/dashboard', async (req, res) => {
       const blogData = await BlogPost.findAll({
         where: {
           user_id: await req.session.user_id // user_id is saved to session at log in
-        }
+        },
+        order: [['createdAt', 'DESC']]
       })
       const posts = blogData.map(element => element.get({ plain: true }))
       // return a plain json object array so that it can be iterated
@@ -83,7 +85,8 @@ router.get('/posts/:id', async (req, res) => {
       },
       where: {
         post_id: req.params.id
-      }
+      },
+      order: [['createdAt', 'DESC']]
     })
     const comments = commentData.map(element => element.get({ plain: true }))
     const post = blogData.get({ plain: true })
