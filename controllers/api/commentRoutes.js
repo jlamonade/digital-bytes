@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { Comment, BlogPost } = require('../../models')
+const { Comment } = require('../../models')
 
 router.post('/comment', async (req, res) => {
   try {
@@ -12,12 +12,19 @@ router.post('/comment', async (req, res) => {
   }
 })
 
-router.get('/comment', async (req, res) => {
-  try {
-    const commentData = await Comment.findAll({
-      where: {
-        post_id: 
-      }
-    })
-  } catch (err) {}
-})
+// router.get('/comment', async (req, res) => {
+//   try {
+//     const commentData = await Comment.findAll({
+//       where: {
+//         post_id: req.body.post_id
+//       }
+//     })
+//     if (commentData) {
+//       res.json(commentData)
+//     } else {
+//       res.status(404).json('404 comment not found.')
+//     }
+//   } catch (err) {
+//     res.status(500).json(err)
+//   }
+// })
