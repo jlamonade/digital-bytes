@@ -1,4 +1,5 @@
 const logout = async () => {
+  // if user is logged in then their session is destroyed when they log out
   const response = await fetch('api/users/logout', {
     method: 'POST',
     headers: { 'Content-type': 'application/json' }
