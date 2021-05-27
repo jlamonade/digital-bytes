@@ -3,6 +3,11 @@ const loginHandler = async (e) => {
   const email = document.querySelector('#input-email').value.trim()
   const password = document.querySelector('#input-password').value.trim()
 
+  /*
+  sends login info to the back where the email
+  and password is used to verify the user
+  and mark them as loggedIn in their session
+  */
   const response = await fetch('/api/users/login', {
     method: 'POST',
     body: JSON.stringify({ email, password }),
