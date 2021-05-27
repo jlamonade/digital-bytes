@@ -1,11 +1,15 @@
-<h2>Dashboard</h2>
+<h2 class="outer-text border-1">Dashboard</h2>
 <div class="row">
   <div class="col col-md-12 col-lg-8 col-12">
-    <a class="btn btn-primary" href="/new">New Post</a>
+    <a class="btn btn-custom my-2" href="/new">New Post</a>
     <div class="row g-2 py-2">
+      {{#if posts}}
       {{#each posts as |post|}}
       {{> post-list}}
       {{/each}}
+      {{else}}
+      <h3 class="outer-text">No Posts Yet...</h3>
+      {{/if}}
     </div>
   </div>
 </div>

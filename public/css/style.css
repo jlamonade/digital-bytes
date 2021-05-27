@@ -1,0 +1,57 @@
+:root {
+  --dark-grey: #252a34;
+  --teal: #08d9d6;
+  --pink: #ff2e63;
+  --offwhite: #eaeaea;
+}
+
+body {
+  background-color: var(--dark-grey);
+} 
+
+a {
+  color: var(--pink);
+}
+
+a:hover {
+  color: var(--teal);
+  transition: ease 0.1s;
+}
+
+form {
+  color: var(--offwhite);
+}
+
+.nav-link {
+  color: var(--pink);
+}
+
+.nav-link:hover {
+  color: var(--teal);
+}
+
+.card {
+  background-color: var(--offwhite);
+}
+
+.card-footer {
+  background-color: var(--offwhite);
+}
+
+.outer-text {
+  color: var(--offwhite);
+}
+
+.btn-custom {
+  background-color: var(--pink);
+}
+
+.btn-custom:hover {
+  box-shadow: 0 0 5px var(--pink);
+  transition: ease 0.1s;
+}
+
+.btn-signup:hover {
+  background-color: var(--teal);
+  transition: ease 0.2s;
+}

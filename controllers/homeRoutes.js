@@ -53,7 +53,7 @@ router.get('/dashboard', async (req, res) => {
       })
       const posts = blogData.map(element => element.get({ plain: true }))
       // return a plain json object array so that it can be iterated
-      res.render('dashboard', { posts: posts })
+      res.render('dashboard', { posts: posts, loggedIn: req.session.loggedIn })
     } catch (err) {
       res.status(500).json('500 Internal Server Error.')
     }
@@ -79,10 +79,11 @@ router.get('/update/:id', async (req, res) => {
     // post data is passed in so that it can populate the
     // input fields so it is easier to edit
     const post = postData.get({ plain: true })
-    res.render('updatepost', { post: post })
+    res.render('updatepost', { post: post, loggedIn: req.session.loggedIn })
   }
 })
 
+// renders article.handlebars
 router.get('/posts/:id', async (req, res) => {
   /*
   both blog data and its associated comments need to be
@@ -90,7 +91,12 @@ router.get('/posts/:id', async (req, res) => {
   template
   */
   try {
-    const blogData = await BlogPost.findByPk(req.params.id)
+    const blogData = await BlogPost.findByPk(req.params.id, {
+      include: {
+        model: User,
+        attributes: ['name']
+      }
+    })
     const commentData = await Comment.findAll({
       include: {
         model: User,
@@ -104,10 +110,16 @@ router.get('/posts/:id', async (req, res) => {
     })
     const comments = commentData.map(element => element.get({ plain: true }))
     const post = blogData.get({ plain: true })
-    if (post) {
+    console.log(post)
+    if (post && comments) { // if comments exist
       res.render('article', {
         post: post, // post data sent to template
         comments: comments, // comment data
+        loggedIn: req.session.loggedIn // loggedIn state
+      })
+    } else if (post) { // if no comments
+      res.render('article', {
+        post: post, // post data sent to template
         loggedIn: req.session.loggedIn // loggedIn state
       })
     } else res.status(404).json('404 Post Not Found.')
