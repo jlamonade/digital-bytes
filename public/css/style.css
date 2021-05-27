@@ -24,6 +24,8 @@ form {
 
 .nav-link {
   color: var(--pink);
+  font-family: 'Permanent Marker', cursive;
+  
 }
 
 .nav-link:hover {
@@ -36,6 +38,10 @@ form {
 
 .card-footer {
   background-color: var(--offwhite);
+}
+
+.title-text {
+  color: var(--pink);
 }
 
 .outer-text {
@@ -54,4 +60,12 @@ form {
 .btn-signup:hover {
   background-color: var(--teal);
   transition: ease 0.2s;
+}
+
+.marker-font {
+  font-family: 'Permanent Marker', cursive;
+}
+
+.serif-font {
+  font-family: 'Alegreya', serif;
 }
