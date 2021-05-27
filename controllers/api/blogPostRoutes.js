@@ -1,5 +1,4 @@
 const router = require('express').Router()
-const { RequestError } = require('cacheable-request')
 const { User, BlogPost } = require('../../models')
 
 // CREATE
