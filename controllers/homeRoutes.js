@@ -26,6 +26,8 @@ router.get('/login', async (req, res) => {
 })
 
 router.get('/signup', async (req, res) => {
+  // checks to see if use is already logged in,
+  // prevents user from signing up while logged in
   if (req.session.loggedIn) {
     res.redirect('/dashboard')
   } else {
@@ -45,7 +47,7 @@ router.get('/dashboard', async (req, res) => {
       })
       const posts = blogData.map(element => element.get({ plain: true }))
       // return a plain json object array so that it can be iterated
-      await res.render('dashboard', { posts: posts })
+      res.render('dashboard', { posts: posts })
     } catch (err) {
       res.status(500).json('500 Internal Server Error.')
     }
