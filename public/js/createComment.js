@@ -2,9 +2,9 @@ const commentHandler = async (e) => {
   e.preventDefault()
   const comment = document.querySelector('#input-comment').value.trim()
   const postId = document.querySelector('#comment-form').dataset.id
-  console.log(JSON.stringify({
-    body: comment
-  }))
+
+  // sends the comment from user input to the back
+  // the rest of the fields will be filled out in the back
   const response = await fetch('/api/comments/new', {
     method: 'POST',
     body: JSON.stringify({
