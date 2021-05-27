@@ -1,8 +1,18 @@
-<div class="row g-3 py-3">
-    {{> post-card post}}
+<div class="row g-2 py-1">
+  {{> post-card post}}
 </div>
-<div class="row g-3 py-3">
-    {{#each comments as |comment|}}
-    {{> comment-card comment}}
-    {{/each}}
+{{#if loggedIn}}
+<div class="row g-2 py-1">
+  {{> comment-form}}
 </div>
+{{else}}
+<div class="row g-2 py-1">
+  <h3>You must <a href="../login">login</a> to comment</h3>
+</div>
+{{/if}}
+<div class="row g-3 py-1">
+  {{#each comments as |comment|}}
+  {{> comment-card comment}}
+  {{/each}}
+</div>
+<script src="/js/createComment.js"></script>
