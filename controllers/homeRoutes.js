@@ -1,16 +1,22 @@
 const router = require('express').Router()
 const { BlogPost, User, Comment } = require('../models')
 
+// root route
 router.get('/', async (req, res) => {
+  /*
+  finds all blogs posts and passes the information into handlebars
+  renderer. model method gets all blog posts and the author.
+  */
   try {
     const blogData = await BlogPost.findAll({
       include: { model: User, attributes: ['name'] }, // to get the username
       order: [['createdAt', 'DESC']] // posts should be in descending order by date
     })
-    // gets all posts and gets the plain version so that data can be iterated
+    // gets the plain version so that data can be iterated
     // and rendered onto page
     const posts = blogData.map(element => element.get({ plain: true }))
     console.log(posts)
+    // also sends session.loggedIn to validate login on the templates
     if (blogData) res.render('index', { posts: posts, loggedIn: req.session.loggedIn })
     else res.status(404).json('404 Blog Data Not Found.')
   } catch (err) {
@@ -52,7 +58,7 @@ router.get('/dashboard', async (req, res) => {
       res.status(500).json('500 Internal Server Error.')
     }
   } else {
-    res.render('login')
+    res.render('login') // if not logged in redirect to login
   }
 })
 
@@ -60,7 +66,7 @@ router.get('/new', async (req, res) => {
   // if user is not logged in send them to login
   if (!req.session.loggedIn) {
     res.render('login')
-  } else {
+  } else { // if logged in send them to the new post page
     res.render('newpost')
   }
 })
@@ -78,12 +84,18 @@ router.get('/update/:id', async (req, res) => {
 })
 
 router.get('/posts/:id', async (req, res) => {
+  /*
+  both blog data and its associated comments need to be
+  queried so that they can be processed and rendered in the
+  template
+  */
   try {
     const blogData = await BlogPost.findByPk(req.params.id)
     const commentData = await Comment.findAll({
       include: {
         model: User,
         attributes: ['name']
+        // get only the name so email/password are not exposed
       },
       where: {
         post_id: req.params.id
@@ -94,9 +106,9 @@ router.get('/posts/:id', async (req, res) => {
     const post = blogData.get({ plain: true })
     if (post) {
       res.render('article', {
-        post: post,
-        comments: comments,
-        loggedIn: req.session.loggedIn
+        post: post, // post data sent to template
+        comments: comments, // comment data
+        loggedIn: req.session.loggedIn // loggedIn state
       })
     } else res.status(404).json('404 Post Not Found.')
   } catch (err) {
