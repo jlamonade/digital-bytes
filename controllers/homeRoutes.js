@@ -4,8 +4,8 @@ const { BlogPost, User, Comment } = require('../models')
 router.get('/', async (req, res) => {
   try {
     const blogData = await BlogPost.findAll({
-      include: { model: User, attributes: ['name'] },
-      order: [['createdAt', 'DESC']]
+      include: { model: User, attributes: ['name'] }, // to get the username
+      order: [['createdAt', 'DESC']] // posts should be in descending order by date
     })
     // gets all posts and gets the plain version so that data can be iterated
     // and rendered onto page
